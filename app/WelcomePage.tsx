@@ -36,7 +36,7 @@ const SUGGESTIONS = [
 
 export default function WelcomePage({ input, onInputChange, onSuggestionClick, onSubmit, streaming }: WelcomePageProps) {
   return (
-    <div className="relative flex flex-col justify-center min-h-screen px-16 py-12 max-w-3xl">
+    <div className="relative flex flex-col justify-center min-h-screen py-12 mx-auto w-full max-w-3xl px-4 sm:px-6">
       <BackgroundGrid />
 
       {/* Heading — left aligned like reference */}

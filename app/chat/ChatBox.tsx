@@ -189,7 +189,8 @@ Always produce only the Mermaid diagram and nothing else.`,
   }
 
   return (
-    <div className="flex h-screen bg-[#0c0c0e] text-white overflow-hidden">
+    <div className="flex h-full bg-[#0c0c0e] text-white overflow-hidden">
+
       <div className="flex-1 flex flex-col px-6 relative min-w-0">
         {!hasMessages ? (
           /* ── Welcome screen ── */
