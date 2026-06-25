@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import ChatbaseWidget from './components/ChatbaseWidget';
+
 
 const FEATURE_CARDS = [
   { title: 'Flowcharts & process maps', description: 'Turn workflows into clean Mermaid diagrams with readable structure.' },
@@ -221,8 +223,15 @@ export default function Page() {
             </div>
           </div>
         </section>
+
+        {/* Chatbot (Chatbase) */}
+        <div className="mt-8">
+          <ChatbaseWidget />
+        </div>
       </div>
+
     </main>
   );
 }
+
 

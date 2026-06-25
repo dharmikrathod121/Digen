@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import ChatbaseWidget from '../components/ChatbaseWidget';
 
 export default function CreatorPage() {
+
   return (
     <main className="min-h-screen bg-[#0c0c0e] text-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
@@ -148,8 +150,14 @@ export default function CreatorPage() {
             </div>
           </div>
         </section>
+
+        {/* Chatbot (Chatbase) */}
+        <div className="mt-8">
+          <ChatbaseWidget />
+        </div>
       </div>
     </main>
   );
 }
+
 
