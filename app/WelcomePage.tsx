@@ -8,7 +8,7 @@ interface WelcomePageProps {
   input: string;
   onInputChange: (value: string) => void;
   onSuggestionClick: (prompt: string) => void;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit: (e?: React.FormEvent) => void;
   streaming: boolean;
   onClear?: () => void;
 }
@@ -73,48 +73,47 @@ export default function WelcomePage({ input, onInputChange, onSuggestionClick, o
             </svg>
           </div>
 
-          <textarea
-            value={input}
-            onChange={e => onInputChange(e.target.value)}
-            onKeyDown={e => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                onSubmit(e as any);
-              }
-            }}
-            placeholder=" Enter a prompt to generate a Diagram...."
-            rows={2}
-            className="w-full bg-transparent px-4 pb-3 text-white text-[14px] placeholder-zinc-600 outline-none resize-none leading-relaxed"
-          />
+          <div className='flex px-4 py-2'>
+            <textarea
+              value={input}
+              onChange={e => onInputChange(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  onSubmit();
+                }
+              }}
+              placeholder=" Enter a prompt to generate a Diagram...."
+              rows={2}
+              className="w-full bg-transparent text-white text-[14px] placeholder-zinc-600 outline-none resize-none leading-relaxed"
+            />
 
-{/* Bottom toolbar */}
-           <div className="flex items-center justify-between px-3 py-2.5 border-t border-white/[0.06]">
-             <button
-               type="button"
-               className="flex items-center gap-1.5 text-[12px] text-zinc-500 hover:text-zinc-300 transition-colors px-2 py-1 rounded-lg hover:bg-white/5"
-             >
-               
-               
-             </button>
+            <div className="flex items-center justify-between border-white/[0.06]">
+              <button
+                type="button"
+                className="flex items-center gap-1.5 text-[12px] text-zinc-500 hover:text-zinc-300 transition-colors px-2 py-1 rounded-lg hover:bg-white/5"
+              >
+              </button>
 
-             <button
-               type="submit"
-               disabled={!input.trim() || streaming}
-               className="w-8 h-8 rounded-lg bg-teal-400 hover:bg-teal-300 disabled:bg-zinc-700 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-150 shadow-lg shadow-teal-900/30"
-             >
-               {streaming ? (
-                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-black animate-spin">
-                   <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="12" />
-                 </svg>
-               ) : (
-                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-black">
-                   <path d="m5 12 7-7 7 7" /><path d="M12 19V5" />
-                 </svg>
-               )}
-             </button>
-           </div>
-         </div>
-       </form>
-     </div>
-   );
+              <button
+                type="submit"
+                disabled={!input.trim() || streaming}
+                className="w-8 h-8 rounded-lg bg-teal-400 hover:bg-teal-300 disabled:bg-zinc-700 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-150 shadow-lg shadow-teal-900/30"
+              >
+                {streaming ? (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-black animate-spin">
+                    <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="12" />
+                  </svg>
+                ) : (
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-black">
+                    <path d="m5 12 7-7 7 7" /><path d="M12 19V5" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
 }

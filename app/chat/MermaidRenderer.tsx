@@ -12,8 +12,11 @@ export default function MermaidRenderer({ code }: { code: string }) {
     (async () => {
       try {
         const mermaidModule = await import('mermaid');
-        const mermaidLib: any = mermaidModule.default ?? mermaidModule;
-        mermaidLib.initialize({
+        const lib = (mermaidModule.default ?? mermaidModule) as unknown as {
+          initialize(options: { startOnLoad: boolean; theme: string; themeVariables: Record<string, string> }): void;
+          render(id: string, code: string): Promise<{ svg?: string } | string>;
+        };
+        lib.initialize({
           startOnLoad: false,
           theme: 'dark',
           themeVariables: {
@@ -28,7 +31,7 @@ export default function MermaidRenderer({ code }: { code: string }) {
           },
         });
         const id = 'mermaid-' + Math.random().toString(36).slice(2);
-        const renderResult = await mermaidLib.render(id, code);
+        const renderResult = await lib.render(id, code);
         const svg = typeof renderResult === 'string' ? renderResult : renderResult.svg ?? String(renderResult);
         svgRef.current = svg;
         if (!cancelled && ref.current) {
